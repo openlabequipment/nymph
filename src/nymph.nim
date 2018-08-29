@@ -3,15 +3,15 @@
 
 type Salsa20State = array[16, uint32]
 
-proc cshl(x: uint32, y: SomeInteger): uint32 =
+proc `<<<` (x: uint32, y: SomeInteger): uint32 =
     (x shl y) xor (x shr (32 - y))
 
 ## implements the Salsa20 quarter-round core
 proc quarterRound*(a, b, c, d: var uint32) {.inline.} =
-    b = b xor ((a + d).cshl 7)
-    c = c xor ((b + a).cshl 9)
-    d = d xor ((c + b).cshl 13)
-    a = a xor ((d + c).cshl 18)
+    b = b xor ((a + d) <<< 7)
+    c = c xor ((b + a) <<< 9)
+    d = d xor ((c + b) <<< 13)
+    a = a xor ((d + c) <<< 18)
 
 ## implements the Salsa20 row round
 proc rowRound*(x: var Salsa20State) =
