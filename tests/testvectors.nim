@@ -85,6 +85,31 @@ block:
                    0x789b010c'u32, 0xd195a681'u32, 0xeb7d5504'u32, 0xa774135c'u32,
                    0x481c2027'u32, 0x53a8e4b5'u32, 0x4c1f89c5'u32, 0x3f78c9c8'u32])
 
+# --- DOUBLEROUND VECTORS --- #
+block:
+    # DOUBLEROUND: VECTOR #1
+    var s = [0x00000001'u32, 0x00000000'u32, 0x00000000'u32, 0x00000000'u32,
+             0x00000000'u32, 0x00000000'u32, 0x00000000'u32, 0x00000000'u32,
+             0x00000000'u32, 0x00000000'u32, 0x00000000'u32, 0x00000000'u32,
+             0x00000000'u32, 0x00000000'u32, 0x00000000'u32, 0x00000000'u32]
+    columnRound(s)
+    rowRound(s)
+    doAssert(s == [0x8186a22d'u32, 0x0040a284'u32, 0x82479210'u32, 0x06929051'u32,
+                   0x08000090'u32, 0x02402200'u32, 0x00004000'u32, 0x00800000'u32,
+                   0x00010200'u32, 0x20400000'u32, 0x08008104'u32, 0x00000000'u32,
+                   0x20500000'u32, 0xa0000040'u32, 0x0008180a'u32, 0x612a8020'u32]);
+    
+    # DOUBLEROUND: VECTOR #2
+    s = [0xde501066'u32, 0x6f9eb8f7'u32, 0xe4fbbd9b'u32, 0x454e3f57'u32,
+         0xb75540d3'u32, 0x43e93a4c'u32, 0x3a6f2aa0'u32, 0x726d6b36'u32,
+         0x9243f484'u32, 0x9145d1e8'u32, 0x4fa9d247'u32, 0xdc8dee11'u32,
+         0x054bf545'u32, 0x254dd653'u32, 0xd9421b6d'u32, 0x67b276c1'u32]
+    columnRound(s)
+    rowRound(s)
+    doAssert(s == [0xccaaf672'u32, 0x23d960f7'u32, 0x9153e63a'u32, 0xcd9a60d0'u32,
+                   0x50440492'u32, 0xf07cad19'u32, 0xae344aa0'u32, 0xdf4cfdfc'u32,
+                   0xca531c29'u32, 0x8e7943db'u32, 0xac1680cd'u32, 0xd503ca00'u32,
+                   0xa74b2ad6'u32, 0xbc331c5c'u32, 0x1dda24c7'u32, 0xee928277'u32])
 
 # let hashVecZeros = [0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32, 0'u32]
 # doAssert(salsaHash(hashVecZeros) == hashVecZeros)
